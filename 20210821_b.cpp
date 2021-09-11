@@ -6,7 +6,7 @@ int main(){
     cin >> n;
 
 
-    int ans = log(n)/log(2);
+    int ans = log2((long double)n);
 
     cout << ans << endl;
 
