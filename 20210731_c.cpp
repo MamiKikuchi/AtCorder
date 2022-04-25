@@ -1,32 +1,48 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
-
-int main(){
-    long long n, m;
-    vector<long long> A, B;
-
+using ull = unsigned long long;
+using ll = long long;
+using vi = vector<int>;
+using vl = vector<long>;
+using vll = vector<long long>;
+using vvi = vector<vi>;
+using vvl = vector<vl>;
+using vvll = vector<vll>;
+using vs = vector<string>;
+using pii = pair<int, int>;
+#define REP(i,n) for(int i=0; i<(n); i++)
+#define REP2(i,x,n) for(int i=x; i<(n); i++)
+#define ALL(n) begin(n),end(n)
+#define PRINT(n) cout << n << endl;
+struct cww{cww(){ios::sync_with_stdio(false);cin.tie(0);}}star;
+const long long INF = numeric_limits<long long>::max();
+int main()
+{
+    int n, m;
+    ll a, b;
     cin >> n >> m;
-
-    A.resize(n);
-    B.resize(m);
-
-
-    for(int i=0;i<n;i++){
-        cin >> A[i];
-        
+    vector<pair<ll, char>> AB(n+m);
+    REP(i, n){
+        cin >> a;
+        AB[i].first = a;
+        AB[i].second = 'A';
     }
-    for(int i=0;i<m;i++){
-        cin >> B[i];
-        
+    REP(i, m){
+        cin >> b;
+        AB[i+n].first = b;
+        AB[i+n].second = 'B';
     }
 
-    sort(A.begin(),A.end());
-    sort(B.begin(),B.end());
+    sort(ALL(AB));
+    ll min_diff = AB[n+m-1].first;
+    REP(i, n+m-1){
+        if((AB[i+1].second == 'A' && AB[i].second == 'B') || (AB[i].second == 'A' && AB[i+1].second == 'B')){
+            if(min_diff > AB[i+1].first-AB[i].first){
+                min_diff = AB[i+1].first-AB[i].first;
+            }
+        }        
+    }
+    PRINT(min_diff)
 
-   if(n>=m) vector<vector<long long>> v(n,vector<long long>(m,0));
-   else vector<vector<long long>> v(m,vector<long long>(n,0));
-
-   
-
-
+    return 0;
 }
