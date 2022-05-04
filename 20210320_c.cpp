@@ -18,6 +18,22 @@ struct cww{cww(){ios::sync_with_stdio(false);cin.tie(0);}}star;
 const long long INF = numeric_limits<long long>::max();
 int main()
 {
+    ll N;
+    cin >> N;
+
+    REP2(i, 1 ,N){
+        if(stoll(to_string(i)+ to_string(i)) > N ){
+            PRINT(i-1)
+            return 0;
+        }
+    }
+    PRINT(0)
+
+    return 0;
+}
+/*
+int main()
+{
     string N;
     cin >> N;
 
@@ -44,3 +60,4 @@ int main()
     PRINT(ans)
     return 0;
 }
+*/
