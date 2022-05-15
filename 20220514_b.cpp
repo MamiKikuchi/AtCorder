@@ -23,20 +23,44 @@ int main()
     vi A(n);
     REP(i, n) cin >> A[i];
 
-    ll dp[n+10][w+10];
-    //j>錘の重さのとき、dp[i+1][j-錘の重さ]+1
-    REP(i, n) REP(j, w) dp[i][j] = 0;
+    vi flg(w+1);
+    
+    //1個のみの時
+    REP(i, n) if(A[i] <= w) flg[A[i]] = 1;
 
-    REP(i, n){
-        REP(j, w){
-            PRINT(dp[i+1][j])
-            if(j > A[i]){
-                if(dp[i+1][j] < 3 && i != j) dp[i+1][j] = dp[i+1][j-A[i]] + 1;
-                PRINT(dp[i+1][j])
-            }
-        }
-    }
-    PRINT(dp[n-1][w-1])
+    //2個のみの時
+    REP(i, n) REP2(j, i+1,n) if((A[i]+A[j]) <= w) flg[A[i]+A[j]] = 1;
 
+    //3個の時
+    REP(i, n) REP2(j, i+1, n) REP2(k, j+1, n) if((A[i]+A[j]+A[k]) <= w) flg[A[i]+A[j]+A[k]] = 1;
+
+    int ans = 0;
+    REP2(i,1, w+1) ans+=flg[i];
+    PRINT(ans)
+    
     return 0;
 }
+
+/*
+解き方
+
+・1以上W以下の全ての整数について
+    ・「nは良い整数か」を管理するboolの配列flgを用意
+    ・flgをfalse（良い整数でない）で初期化
+・3個以下である錘の集合を全て調べる
+    ・求めた各集合について錘の重さの和wを求める
+    ・wがW以下の時：flg[w]をtureにする
+・最終的な答え：trueであるフラグの個数
+
+for-loop の x = 2 のときの例
+  for(int i = 0; i < N; i++) {
+    for(int j = i + 1; j < N; j++) {
+       異なるおもりの組 (i, j) について計算する
+    }
+  }
+・計算量O(N^x)
+・フラグ配列の分のO(W)
+・1個の時、2個の時、3個の時の3パターンでO(N+N^2+N^3)
+・合わせてO(W+N^3)→ 高速で動作可能
+
+*/
