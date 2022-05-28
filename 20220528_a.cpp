@@ -18,22 +18,9 @@ struct cww{cww(){ios::sync_with_stdio(false);cin.tie(0);}}star;
 const long long INF = numeric_limits<long long>::max();
 int main()
 {
-    int n, k;
-    cin >> n >> k;
-    vll h(n);
-    REP(i, n) cin >> h[i];
-
-    // dp配列の定義
-    ll dp[n];
-    // dp配列の初期化
-    REP(i, n) dp[i] = INF;
-    // dp配列の初期条件
-    dp[0] = 0;
-    REP2(i, 1, n){
-        if(i > 1){
-            REP2(j, 1, k+1) dp[i] = min(dp[i-1], dp[i-k]+abs(h[i]-h[i-j]));
-        }
-    }
-
+    int a, b, c;
+    cin >> a >> b >> c;
+    if((b >= a && b <= c) || (b <= a && b >= c)) PRINT("Yes")
+    else PRINT("No")
     return 0;
 }
