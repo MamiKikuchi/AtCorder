@@ -31,9 +31,11 @@ int main()
     dp[0] = 0;
     REP2(i, 1, n){
         if(i > 1){
-            REP2(j, 1, k+1) dp[i] = min(dp[i-1], dp[i-k]+abs(h[i]-h[i-j]));
+            REP2(j, 1, k+1) dp[i] = min(dp[i], dp[i-j]+abs(h[i]-h[i-j]));
+        }else{
+            dp[i] = dp[i-1] + abs(h[i]-h[i-1]);
         }
     }
-
+    PRINT(dp[n-1])
     return 0;
 }
