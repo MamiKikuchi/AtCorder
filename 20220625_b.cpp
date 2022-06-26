@@ -23,18 +23,11 @@ int main()
     vi A(k), L(q);
     REP(i, k) cin >> A[i];
     REP(i, q) cin >> L[i];
-    //マスのベクトル: 0の時マスにはコマが置いていない
-    vi N(n, 0);
-    REP(j, q){
-        N[A[L[j]-1]-1] = L[j];
-    }
+
     REP(i, q){
         if(A[L[i]-1] != n){
-            if(N[A[L[i]-1]] == 0){
-                N[A[L[i]-1]] = L[i];
-                N[A[L[i]-1]-1] = 0;
-                A[L[i]-1]++;
-            }
+            if(L[i] == k) A[L[i]-1]++;
+            else if(A[L[i]-1] + 1 < A[L[i]]) A[L[i]-1]++;
         }
     }
     REP(i, k) cout << A[i] << " ";
