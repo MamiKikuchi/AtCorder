@@ -18,11 +18,12 @@ struct cww{cww(){ios::sync_with_stdio(false);cin.tie(0);}}star;
 const long long INF = numeric_limits<long long>::max();
 int main()
 {
-    ll N, K;
-    cin >> N >> K;
-
-    ll min_num = N % K;
-    if(min_num > (K - min_num)) min_num = K - min_num;
-    PRINT(min_num)
+    int n;
+    cin >> n;
+    vi d(n);
+    REP(i, n) cin >> d[i];
+    sort(ALL(d));
+    int k = d[n/2] - d[n/2-1];
+    PRINT(k)
     return 0;
 }
